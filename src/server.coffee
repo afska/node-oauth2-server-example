@@ -12,7 +12,7 @@ app.oauth = oauthServer
   model: {}
   grants: ["password", "authorization_code"]
   debug: true
-  accessTokenLifetime: 2678400 #number of seconds || null (never expires)
+  accessTokenLifetime: 2678400 # number of seconds || null (never expires)
 app.use app.oauth.errorHandler()
 
 # Routes
