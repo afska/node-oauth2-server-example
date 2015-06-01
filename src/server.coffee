@@ -13,9 +13,10 @@ app.oauth = oauthServer
   grants: ["password", "authorization_code"]
   debug: true
   accessTokenLifetime: 2678400 # number of seconds || null (never expires)
-app.use app.oauth.errorHandler()
 
 require("./routes") app
+
+app.use app.oauth.errorHandler()
 
 # Listen...
 app.listen 3000
