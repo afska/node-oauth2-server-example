@@ -14,10 +14,12 @@ OAuthUsersSchema = new Schema
     scopes: String
   ]
 
+# Creates an user
 OAuthUsersSchema.static "register", (fields, cb) ->
   user = new OAuthUsersModel(fields)
   user.save cb
 
+# Retrieves an user
 OAuthUsersSchema.static "getUser", (username, password, cb) ->
   OAuthUsersModel.authenticate username, password, (err, user) ->
     if err or not user
@@ -25,6 +27,7 @@ OAuthUsersSchema.static "getUser", (username, password, cb) ->
 
     cb null, user.username
 
+# Authenticates an user
 OAuthUsersSchema.static "authenticate", (username, password, cb) ->
   @findOne { username: username }, (err, user) ->
     if err or not user

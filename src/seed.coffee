@@ -1,8 +1,10 @@
 promisify = require("bluebird").promisifyAll
-models = require('./models')
+models = require("./models")
+
+# Seed data for the DB
 
 exampleUser =
-  username: "JuanCarlos"
+  username: "JuanCarlos" #an example person
   password: "aPassword"
   authorizations: [
     { app: "capi2231", scopes: "all" }
