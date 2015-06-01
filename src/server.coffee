@@ -1,6 +1,7 @@
 express = require("express")
 bodyParser = require("body-parser")
 oauthServer = require("oauth2-server")
+models = require("./models")
 
 # Express & Body parser
 app = express()
@@ -9,7 +10,7 @@ app.use bodyParser.json()
 
 # OAuth server
 app.oauth = oauthServer
-  model: {}
+  model: models.oauth
   grants: ["password", "authorization_code"]
   debug: true
   accessTokenLifetime: 2678400 # number of seconds || null (never expires)
