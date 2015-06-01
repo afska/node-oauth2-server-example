@@ -22,7 +22,7 @@ OAuthAppsSchema = new Schema
 # Retrieves an App from the DB
 OAuthAppsSchema.static "getClient", (clientId, clientSecret, cb) ->
   params = clientId: clientId
-  if clientSecret != null
+  if clientSecret isnt null
     params.clientSecret = clientSecret
 
   OAuthAppsModel.findOne params, cb
