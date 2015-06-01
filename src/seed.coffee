@@ -17,8 +17,8 @@ exampleApp =
   redirectUri: "/auth/lepocamon/redirect"
   scopes: "all"
 
-models.User.create exampleUser, =>
+models.User.create exampleUser, ->
   console.log "User created!"
 
-models.App.create exampleApp, =>
+models.App.create exampleApp, ->
   console.log "App created!"

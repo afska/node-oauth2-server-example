@@ -3,10 +3,21 @@ bodyParser = require("body-parser")
 oauthServer = require("oauth2-server")
 models = require("./models")
 
-# Express & Body parser
+# Express config
 app = express()
+#   body parsers
 app.use bodyParser.urlencoded extended: true
 app.use bodyParser.json()
+
+#   rendering engine
+app.engine "html", require("ejs").renderFile
+app.use express.static "#{__dirname}/../views"
+app.set "view engine", "html"
+
+#   session
+signature = "asdasdcookies signatureasdasd"
+app.use require("cookie-parser") signature
+app.use require("cookie-session") signature
 
 # OAuth server
 app.oauth = oauthServer

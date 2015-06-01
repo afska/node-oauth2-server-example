@@ -23,16 +23,14 @@ OAuthUsersSchema.static "register", (fields, cb) ->
 # Retrieves an user
 OAuthUsersSchema.static "getUser", (username, password, cb) ->
   OAuthUsersModel.authenticate username, password, (err, user) ->
-    if err or not user
-      return cb(err)
+    if err or not user then return cb(err)
 
     cb null, user.username
 
 # Authenticates an user
 OAuthUsersSchema.static "authenticate", (username, password, cb) ->
   @findOne { username: username }, (err, user) ->
-    if err or not user
-      return cb(err)
+    if err or not user then return cb(err)
 
     passwordOk = sha1(password) is user.password
 
