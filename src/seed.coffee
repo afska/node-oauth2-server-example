@@ -5,7 +5,7 @@ models = require("./models")
 
 exampleUser =
   username: "JuanCarlos" # an example person
-  password: "aPassword" # todo: hash the password!
+  password: "a254d231e9f4b772b5d984d22bda9a5f66fa86ba" #SHA1 of "aPassword"
   authorizations: [
     { app: "capi2231", scopes: "all" }
   ]

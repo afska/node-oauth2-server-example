@@ -14,6 +14,7 @@
     "coffee-script": "^1.9.3",
     "express": "^4.12.4",
     "mongoose": "^4.0.4",
-    "node-oauth2-server": "^2.4.0"
+    "node-oauth2-server": "^2.4.0",
+    "sha1": "^1.1.1"
   }
 }

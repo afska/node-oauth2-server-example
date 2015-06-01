@@ -1,4 +1,5 @@
 mongoose = require("mongoose")
+sha1 = require("sha1")
 Schema = mongoose.Schema
 
 OAuthUsersSchema = new Schema
@@ -33,7 +34,7 @@ OAuthUsersSchema.static "authenticate", (username, password, cb) ->
     if err or not user
       return cb(err)
 
-    passwordOk = password is user.password
+    passwordOk = sha1(password) is user.password
 
     authenticatedUser = if passwordOk then user else null
     cb null, authenticatedUser
