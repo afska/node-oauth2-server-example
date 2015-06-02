@@ -22,8 +22,8 @@ module.exports = (app) ->
 
     App.findOne { clientId: client_id }, (err, app) ->
       if err then return unauthorized res, "The app doesn't exist."
-      if not _.contains app.redirectUris, redirect_uri
-        return unauthorized res, "The app doesn't have this redirect uri."
+      if redirect_uri isnt app.redirectUri
+        return unauthorized res, "The redirect_uri is invalid."
 
       User.findOne { username: user.username }, (err, user) ->
         if err then return unauthorized res, "The cookie lies >.<"
@@ -58,7 +58,7 @@ module.exports = (app) ->
   #   Login and logout:
   app.post "/login", app.oauth.authorise(), (req, res) ->
     User.findOne { username: req.user.id }, (err, user) ->
-      req.session = user: _.omit user, "password"
+      req.session = user: _.pick user, "username"
       res.send "Hi #{req.session.user.username}, you're now logged in. I'll give you a cookie :)"
 
   app.post "/logout", (req, res) ->

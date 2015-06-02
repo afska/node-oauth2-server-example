@@ -15,9 +15,9 @@ AppsSchema = new Schema
   scopes:
     type: String
     required: true
-  redirectUris: [
+  redirectUri:
     type: String
-  ]
+    required: true
 
 # Retrieves an App from the DB
 AppsSchema.static "getClient", (clientId, clientSecret, cb) ->
