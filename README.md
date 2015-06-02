@@ -4,45 +4,34 @@
 npm install -g coffee-script
 npm install
 
-coffee seed.coffee #creates the test user and app
-npm start #runs the server
+coffee src/seed.coffee # creates the test user and app
+npm start # runs the server
 ```
 
-## Example using the `password` grant type
+### Example using the `password` and `authorization_code` grant types
+#### If you go to /...
+![1](https://cloud.githubusercontent.com/assets/1631752/7947211/150ba8d6-0952-11e5-862b-3094fc76b89f.PNG)
 
-First you must insert client id/secret and user into storage. This is out of the scope of this example.
+#### ...the secret room is locked...
+![2](https://cloud.githubusercontent.com/assets/1631752/7947216/17dd1054-0952-11e5-888f-5ce34cd9cbd2.PNG)
 
-To obtain a token you should POST to `/oauth/token`. You should include your client credentials in
-the Authorization header ("Basic " + client_id:client_secret base64'd), and then grant_type ("password"),
-username and password in the request body, for example:
+#### ...but if you configure Basic Auth with the clientId and clientSecret...
+![3](https://cloud.githubusercontent.com/assets/1631752/7947220/1aa4c624-0952-11e5-88cb-43fd1c65a290.PNG)
 
-```
-POST /oauth/token HTTP/1.1
-Host: server.example.com
-Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
-Content-Type: application/x-www-form-urlencoded
+#### ...and do an OAuth2 request...
+![4](https://cloud.githubusercontent.com/assets/1631752/7947222/1d254a4a-0952-11e5-8136-768783826403.PNG)
 
-grant_type=password&username=johndoe&password=A3ddj3w
-```
-This will then call the following on your model (in this order):
- - getClient (clientId, clientSecret, callback)
- - grantTypeAllowed (clientId, grantType, callback)
- - getUser (username, password, callback)
- - saveAccessToken (accessToken, clientId, expires, user, callback)
- - saveRefreshToken (refreshToken, clientId, expires, user, callback) **(if using)**
+#### ...all is fine :smiley:...
+![5](https://cloud.githubusercontent.com/assets/1631752/7947224/20482300-0952-11e5-873f-a4d7509e4c17.PNG)
 
-Provided there weren't any errors, this will return the following (excluding the `refresh_token` if you've not enabled the refresh_token grant type):
+#### ...and the doors will open.
+![6](https://cloud.githubusercontent.com/assets/1631752/7947230/22df8cca-0952-11e5-9ef3-d50665f1f41d.PNG)
 
-```
-HTTP/1.1 200 OK
-Content-Type: application/json;charset=UTF-8
-Cache-Control: no-store
-Pragma: no-cache
+#### Maybe you want to authorize the application...
+![7](https://cloud.githubusercontent.com/assets/1631752/7947233/25341130-0952-11e5-85ef-5b7638c7f5c4.PNG)
 
-{
-  "access_token":"2YotnFZFEjr1zCsicMWpAA",
-  "token_type":"bearer",
-  "expires_in":3600,
-  "refresh_token":"tGzv3JOkF0XG5Qx2TlKWIA"
-}
-```
+#### ...probably, a code will be generated.
+![8](https://cloud.githubusercontent.com/assets/1631752/7947236/2769ae88-0952-11e5-8e72-eff02ad9b798.PNG)
+
+#### You can exchange that code by a token! be quickly, it expires!
+![9](https://cloud.githubusercontent.com/assets/1631752/7947237/2a012270-0952-11e5-8650-a30b7a887eb8.PNG)
