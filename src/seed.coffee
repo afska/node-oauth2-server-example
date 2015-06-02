@@ -14,11 +14,11 @@ exampleApp =
   clientId: "capi2231" # another app that integrates with Lepocamon
   clientSecret: "secret123"
   name: "Capituchi"
-  redirectUri: "/auth/lepocamon/redirect"
   scopes: "all"
+  redirectUris: ["http://capituchi.com/auth/lepocamon/redirect"]
 
 models.User.create exampleUser, ->
   console.log "User created!"
-
-models.App.create exampleApp, ->
-  console.log "App created!"
+  models.App.create exampleApp, ->
+    console.log "App created!"
+    process.exit 0
