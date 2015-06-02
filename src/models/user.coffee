@@ -29,13 +29,17 @@ UsersSchema.static "getUser", (username, password, cb) ->
 
 # Authenticates an user
 UsersSchema.static "authenticate", (username, password, cb) ->
-  @findOne { username: username }, (err, user) ->
+  UsersModel.findByName username, (err, user) ->
     if err or not user then return cb(err)
 
     passwordOk = sha1(password) is user.password
 
     authenticatedUser = if passwordOk then user else null
     cb null, authenticatedUser
+
+# Finds an user
+UsersSchema.static "findByName", (username, cb) ->
+  @findOne { username: username }, cb
 
 mongoose.model "users", UsersSchema
 UsersModel = mongoose.model "users"
