@@ -24,7 +24,7 @@ npm start # runs the server
 #### ...all is fine :smiley:...
 ![5](https://cloud.githubusercontent.com/assets/1631752/7947224/20482300-0952-11e5-873f-a4d7509e4c17.PNG)
 
-#### ...and the doors will open.
+#### ...and the doors will be opened.
 ![6](https://cloud.githubusercontent.com/assets/1631752/7947230/22df8cca-0952-11e5-9ef3-d50665f1f41d.PNG)
 
 #### Maybe you want to authorize the application...
