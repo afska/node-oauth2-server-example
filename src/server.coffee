@@ -17,7 +17,9 @@ app.set "view engine", "html"
 #   session
 signature = "asdasdcookies signatureasdasd"
 app.use require("cookie-parser") signature
-app.use require("cookie-session") signature
+app.use require("cookie-session")
+  key: "oauth-server"
+  secret: signature
 
 # OAuth server
 app.oauth = oauthServer

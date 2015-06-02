@@ -31,5 +31,10 @@ module.exports = (app) ->
 
   #   Login:
   app.post "/login", app.oauth.authorise(), (req, res) ->
-    req.user # { id: "JuanCarlos" } todo: store in session
-    res.send "Hi asdYou're now logged in. I'll give you a cookie as reward :)"
+    req.session = user: req.user
+    res.send "Hi #{req.user.id}, you're now logged in. I'll give you a cookie as reward :)"
+
+  #   Secret:
+  app.get "/secret", (req, res) ->
+    if not req.session.user? then return res.sendStatus 401
+    res.send "boo"
