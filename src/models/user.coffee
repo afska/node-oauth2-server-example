@@ -2,7 +2,7 @@ mongoose = require("mongoose")
 sha1 = require("sha1")
 Schema = mongoose.Schema
 
-OAuthUsersSchema = new Schema
+UsersSchema = new Schema
   username:
     type: String
     unique: true
@@ -16,19 +16,19 @@ OAuthUsersSchema = new Schema
   ]
 
 # Creates an user
-OAuthUsersSchema.static "register", (fields, cb) ->
-  user = new OAuthUsersModel(fields)
+UsersSchema.static "register", (fields, cb) ->
+  user = new UsersModel(fields)
   user.save cb
 
 # Retrieves an user
-OAuthUsersSchema.static "getUser", (username, password, cb) ->
-  OAuthUsersModel.authenticate username, password, (err, user) ->
+UsersSchema.static "getUser", (username, password, cb) ->
+  UsersModel.authenticate username, password, (err, user) ->
     if err or not user then return cb(err)
 
     cb null, user.username
 
 # Authenticates an user
-OAuthUsersSchema.static "authenticate", (username, password, cb) ->
+UsersSchema.static "authenticate", (username, password, cb) ->
   @findOne { username: username }, (err, user) ->
     if err or not user then return cb(err)
 
@@ -37,7 +37,7 @@ OAuthUsersSchema.static "authenticate", (username, password, cb) ->
     authenticatedUser = if passwordOk then user else null
     cb null, authenticatedUser
 
-mongoose.model "users", OAuthUsersSchema
-OAuthUsersModel = mongoose.model "users"
+mongoose.model "users", UsersSchema
+UsersModel = mongoose.model "users"
 
-module.exports = OAuthUsersModel
+module.exports = UsersModel

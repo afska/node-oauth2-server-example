@@ -1,7 +1,7 @@
 mongoose = require("mongoose")
 Schema = mongoose.Schema
 
-OAuthAppsSchema = new Schema
+AppsSchema = new Schema
   clientId:
     type: String
     unique: true
@@ -20,21 +20,21 @@ OAuthAppsSchema = new Schema
     required: true
 
 # Retrieves an App from the DB
-OAuthAppsSchema.static "getClient", (clientId, clientSecret, cb) ->
+AppsSchema.static "getClient", (clientId, clientSecret, cb) ->
   params = clientId: clientId
   if clientSecret isnt null
     params.clientSecret = clientSecret
 
-  OAuthAppsModel.findOne params, cb
+  AppsModel.findOne params, cb
 
 # Returns if an App supports a specific grant type
-OAuthAppsSchema.static "grantTypeAllowed", (clientId, grantType, cb) ->
+AppsSchema.static "grantTypeAllowed", (clientId, grantType, cb) ->
   if grantType is "password" or grantType is "authorization_code"
     return cb false, true
 
   cb false, false
 
-mongoose.model "apps", OAuthAppsSchema
-OAuthAppsModel = mongoose.model "apps"
+mongoose.model "apps", AppsSchema
+AppsModel = mongoose.model "apps"
 
-module.exports = OAuthAppsModel
+module.exports = AppsModel
