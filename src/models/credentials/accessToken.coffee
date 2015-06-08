@@ -18,6 +18,10 @@ module.exports.getAccessToken = (bearerToken, cb) ->
 
 # Creates an access token
 module.exports.saveAccessToken = (token, clientId, expires, userId, cb) ->
+  if userId.id?
+    userId = userId.id # super hack
+    # (https://github.com/thomseddon/node-oauth2-server/issues/166#issuecomment-110080567)
+
   fields =
     clientId: clientId
     userId: userId
