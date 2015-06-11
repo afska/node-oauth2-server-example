@@ -1,5 +1,10 @@
 # oauth2-server-example
 
+#### Pre-requisitos
+- Tener instalado [NodeJS](https://nodejs.org/)
+- Tener instalado [MongoDB](https://www.mongodb.org/downloads)
+
+
 ```bash
 npm install -g coffee-script
 npm install
