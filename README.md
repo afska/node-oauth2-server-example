@@ -35,3 +35,7 @@ npm start # runs the server
 
 #### You can exchange that code by a token! be quickly, it expires!
 ![9](https://cloud.githubusercontent.com/assets/1631752/7947237/2a012270-0952-11e5-8650-a30b7a887eb8.PNG)
+
+```
+http://localhost:3000/oauth/authorise?response_type=code&client_id=capi2231&redirect_uri=http://capituchi.com/auth/lepocamon/redirect
+```
