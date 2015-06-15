@@ -1,11 +1,12 @@
 User = require("../models").User
 _ = require("lodash")
+authenticate = require("./middlewares/authenticate")
 
 module.exports = (app) ->
   #   Public:
-  app.get "/", (req, res) -> res.send "Home. Please login!"
+  app.get "/", (req, res) ->
+    res.send "Home. Please login!"
 
   #   Secret:
-  app.get "/secret", (req, res) ->
-    if not req.session.user? then return unauthorized res, "Unauthorized!!! -.-"
-    res.send "Hi #{req.session.user.username}! This is a secret content."
+  app.get "/secret", authenticate, (req, res) ->
+    res.send "Hi #{req.user.profile.firstName} #{req.user.profile.lastName}! This is a secret content."
