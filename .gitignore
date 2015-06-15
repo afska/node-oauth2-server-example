@@ -1,3 +1,5 @@
+src/config/env/index.coffee
+
 node_modules/
 .idea
 *.sublime-workspace

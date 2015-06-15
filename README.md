@@ -1,5 +1,10 @@
 # oauth2-server-example
 
+#### Pre-requisitos
+- Tener instalado [NodeJS](https://nodejs.org/)
+- Tener instalado [MongoDB](https://www.mongodb.org/downloads)
+- Crear un `src/config/env/index.coffee` con el formato de `index.sample.coffee`, que tenga los valores secretos de las variables de entorno.
+
 ```bash
 npm install -g coffee-script
 npm install

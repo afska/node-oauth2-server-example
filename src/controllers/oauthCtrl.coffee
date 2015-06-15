@@ -1,5 +1,7 @@
 User = require("../models").User
 App = require("../models").App
+url = require("url")
+authenticate = require("./middlewares/authenticate")
 _ = require("lodash")
 
 module.exports = (app) ->
@@ -8,7 +10,8 @@ module.exports = (app) ->
     client_id = req.query.client_id
     redirect_uri = req.query.redirect_uri
 
-    if not user? then return res.redirect "/" # redirect to login
+    if not req.user? # redirect to login
+      return res.redirect "http://producteca.com/?redirectUri=#{req.url}"
     if req.query.response_type isnt "code" then unauthorized res, "The response_type must by 'code'."
     if not client_id? then return unauthorized res, "A client_id is required."
     if not redirect_uri? then return unauthorized res, "A redirect_uri is required."
@@ -39,7 +42,7 @@ module.exports = (app) ->
   app.all "/oauth/token", app.oauth.grant()
 
   #   Authorise screen
-  app.get "/oauth/authorise", ((req, res, next) ->
+  app.get "/oauth/authorise", authenticate, ((req, res, next) ->
     authCodeValidate req, res, next, (viewModel) ->
       res.render "authorise", viewModel
   ), authCodeMiddleware()
