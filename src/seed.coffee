@@ -1,4 +1,3 @@
-promisify = require("bluebird").promisifyAll
 models = require("./models")
 
 # Seed data for the DB
